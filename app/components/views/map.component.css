@@ -1,0 +1,88 @@
+.map-board{
+  background-color: #DDD;
+  border-radius: 5px;
+}
+.map-board td{
+  height: 30px;
+  width: 30px;
+  margin: 2px;
+  padding: 5px;
+}
+.map-board .cell-0{
+  border: 1px dashed rgba(0,0,0,0.5);
+}
+
+.map-board .cell-1{
+  border: 1px dashed rgba(0,0,0,0.5);
+  border-top: 3px solid #333;
+}
+
+.map-board .cell-2{
+  border: 1px dashed rgba(0,0,0,0.5);
+  border-right: 3px solid #333;
+}
+.map-board .cell-3{
+  border: 1px dashed rgba(0,0,0,0.5);
+  border-bottom: 3px solid #333;
+}
+.map-board .cell-4{
+  border: 1px dashed rgba(0,0,0,0.5);
+  border-left: 3px solid #333;
+}
+.map-board .cell-5{
+  border: 1px dashed rgba(0,0,0,0.5);
+  border-top: 3px solid #333;
+  border-left: 3px solid #333;
+}
+.map-board .cell-6{
+  border: 1px dashed rgba(0,0,0,0.5);
+  border-top: 3px solid #333;
+  border-right: 3px solid #333;
+}
+.map-board .cell-7{
+  border: 1px dashed rgba(0,0,0,0.5);
+  border-bottom: 3px solid #333;
+  border-right: 3px solid #333;
+}
+.map-board .cell-8{
+  border: 1px dashed rgba(0,0,0,0.5);
+  border-bottom: 3px solid #333;
+  border-left: 3px solid #333;
+}
+.map-board .cell-9{
+  border: 1px dashed rgba(0,0,0,0.5);
+  border-top: 3px solid #333;
+  border-bottom: 3px solid #333;
+}
+.map-board .cell-10{
+  border: 1px dashed rgba(0,0,0,0.5);
+  border-left: 3px solid #333;
+  border-right: 3px solid #333;
+}
+.map-board .cell-11{
+  border: 1px dashed rgba(0,0,0,0.5);
+  border-top: 3px solid #333;
+  border-right: 3px solid #333;
+  border-bottom: 3px solid #333;
+}
+.map-board .cell-12{
+  border: 1px dashed rgba(0,0,0,0.5);
+  border-left: 3px solid #333;
+  border-bottom: 3px solid #333;
+  border-right: 3px solid #333;
+}
+.map-board .cell-13{
+  border: 1px dashed rgba(0,0,0,0.5);
+  border-left: 3px solid #333;
+  border-top: 3px solid #333;
+  border-bottom: 3px solid #333;
+}
+.map-board .cell-14{
+  border: 1px dashed rgba(0,0,0,0.5);
+  border-left: 3px solid #333;
+  border-top: 3px solid #333;
+  border-right: 3px solid #333;
+}
+.map-board .cell-15{
+  border: 3px solid #333;
+}

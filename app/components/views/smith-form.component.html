@@ -1,0 +1,39 @@
+    <!--
+    <form  [formGroup]="smithForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" name="name" ngModel required>
+      </div>
+      <div class="form-group">
+        <label for="money">Money</label>
+        <input type="number" class="form-control" name="money" ngModel required>
+      </div>
+      <div class="form-group">
+        <label for="rank">Rank</label>
+        <select class="form-control" name="rank" ngModel>
+	      <option *ngFor="let item of ranks" [value]="item.value">{{item.name}}</option>
+	    </select>
+      </div>
+      <button class="btn btn-default" (click)='onSubmit()'>Submit</button>
+    </form>
+-->
+
+    <form *ngIf='smithModel' #f="ngForm">
+      <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" name="name" [(ngModel)]='smithModel.Name' required>
+        </div>
+        <div class="form-group">
+          <label for="money">Money</label>
+          <input type="number" class="form-control" name="money" [(ngModel)]='smithModel.Money' required>
+        </div>
+        <div class="form-group">
+          <label for="rank">Rank</label>
+          <select class="form-control" name="rank" [(ngModel)]='smithModel.Rank'>
+          <option *ngFor="let item of ranks" [value]="item.value">{{item.name}}</option>
+        </select>
+        </div>
+        <button class="btn btn-default" [disabled]="!f.valid" (click)='onSubmit()'>Submit</button>
+    </form>
+
+

@@ -1,0 +1,7 @@
+<div class="container">
+	<h1>Update new Metalsmith</h1>
+	<div class="shine">Parent Smith Model|{{smithModel.Id}}|{{smithModel.Name}}|{{smithModel.Rank}}|{{smithModel.Money}}</div>
+	<loading-square *ngIf='!smithModel'></loading-square>
+	<smith-form *ngIf='smithModel' (callback)='updateSmith($event)' [smithModel]='smithModel'></smith-form>
+	<span class="text-danger" *ngIf='errMsg'>{{errMsg}}</span>
+</div>
