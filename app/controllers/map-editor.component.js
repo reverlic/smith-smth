@@ -13,6 +13,7 @@ var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
 var map_1 = require('../Models/map');
 var map_component_1 = require('../components/map.component');
+var map_edit_tool_component_1 = require('../components/map-edit-tool.component');
 var MapEditorComponent = (function () {
     function MapEditorComponent(router, route) {
         this.router = router;
@@ -29,8 +30,19 @@ var MapEditorComponent = (function () {
     MapEditorComponent.prototype.editSelectedCell = function (cellType) {
         this.mapData.layout[this.selectedCell.x][this.selectedCell.y].terrain = cellType;
     };
+    MapEditorComponent.prototype.editCellType = function (cellType) {
+        this.selectedCellType = cellType;
+    };
     MapEditorComponent.prototype.onCreate = function (xSize, ySize) {
         this.mapData = new map_1.Map(xSize, ySize);
+    };
+    MapEditorComponent.prototype.downloadMap = function () {
+        console.log('1');
+        var link = document.createElement('a');
+        link.setAttribute('download', 'mapData.json');
+        console.log('2');
+        link.href = 'data:application/x-download;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.mapData));
+        link.click();
     };
     MapEditorComponent.prototype.ngOnInit = function () {
         for (var i = 0; i < 16; i++) {
@@ -41,7 +53,7 @@ var MapEditorComponent = (function () {
         core_1.Component({
             selector: 'map-editor',
             templateUrl: 'app/controllers/views/map-editor.component.html',
-            directives: [forms_1.FORM_DIRECTIVES, map_component_1.MapComponent]
+            directives: [forms_1.FORM_DIRECTIVES, map_component_1.MapComponent, map_edit_tool_component_1.MapEditToolComponent]
         }), 
         __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute])
     ], MapEditorComponent);

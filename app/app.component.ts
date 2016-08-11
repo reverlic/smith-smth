@@ -7,7 +7,7 @@ import { LeftNavigation } from './components/left-navigation.component';
 @Component({
   selector: 'my-app',
   template: `
-  <left-nav></left-nav>
+  <!--<left-nav></left-nav>-->
   <h1>{{title}}</h1>
   <router-outlet></router-outlet>
   `,

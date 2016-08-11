@@ -19,7 +19,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n  <left-nav></left-nav>\n  <h1>{{title}}</h1>\n  <router-outlet></router-outlet>\n  ",
+            template: "\n  <!--<left-nav></left-nav>-->\n  <h1>{{title}}</h1>\n  <router-outlet></router-outlet>\n  ",
             directives: [router_1.ROUTER_DIRECTIVES, left_navigation_component_1.LeftNavigation],
         }), 
         __metadata('design:paramtypes', [])

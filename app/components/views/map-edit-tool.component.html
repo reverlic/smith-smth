@@ -1,0 +1,5 @@
+<div class="map-menu">
+	<div class="icon-wrap">
+		<div *ngFor="let item of iconType" class='icon' [className]="item.name + ' icon'" [ngClass]="{active: selectedCellType==item.value}" (click)="clickCellType(item.value)"></div>
+	</div>
+</div>

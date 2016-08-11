@@ -9,22 +9,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var forms_1 = require('@angular/forms');
 var MapEditToolComponent = (function () {
     function MapEditToolComponent() {
         this.iconType = [];
-        this.selectedCellType = 0;
+        this.
+        //selectedCell: EventEmitter<any> = new EventEmitter<any>();
+        updateCellType = new core_1.EventEmitter();
+        //this.selectedCellType = 0;
     }
+    MapEditToolComponent.prototype.clickCellType = function (value) {
+        this.selectedCellType = value;
+        this.updateCellType.emit(value);
+    };
     MapEditToolComponent.prototype.ngOnInit = function () {
         for (var i = 0; i < 16; i++) {
             this.iconType.push({ name: 'cell-' + i, value: i });
         }
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], MapEditToolComponent.prototype, "selectedCellType", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], MapEditToolComponent.prototype, "updateCellType", void 0);
     MapEditToolComponent = __decorate([
         core_1.Component({
             selector: 'map-edit-tool',
-            templateUrl: 'app/controllers/views/map-edit-tool.component.html',
-            directives: [forms_1.FORM_DIRECTIVES]
+            templateUrl: 'app/components/views/map-edit-tool.component.html',
+            styleUrls: ['app/components/views/map-edit-tool.component.css'],
         }), 
         __metadata('design:paramtypes', [])
     ], MapEditToolComponent);

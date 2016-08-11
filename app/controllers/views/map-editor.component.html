@@ -1,14 +1,13 @@
 <div class="container">
 	<h1>Map Editor</h1>
-	x: {{selectedCell.x}} y: {{selectedCell.y}}
-	<map *ngIf='mapData' [mapData]='mapData' (selectedCell)='onCellSeleted($event)'></map>
-	
-    <div *ngIf='mapData' class="map-menu">
-	    <div class="icon-wrap">
-	    	<div *ngFor="let item of iconType" class='icon' [className]="item.name + ' icon'" [ngClass]="{active: selectedCellType==item.value}" (click)="selectedCellType=item.value"></div>
-    	</div>
-    </div>
-        
+	x: {{selectedCell.x}} y: {{selectedCell.y}} cellType: {{selectedCellType}}
+  <div *ngIf='mapData'>
+    	<map [mapData]='mapData' (selectedCell)='onCellSeleted($event)'></map>
+      
+      <div class="btn btn-primary" (click)='downloadMap()'>Save</div>
+      <map-edit-tool [selectedCellType]='selectedCellType' (updateCellType)='editCellType($event)'></map-edit-tool>
+    
+  </div>
 
 	<form *ngIf='!mapData' #f="ngForm">
         <div class="form-group">
@@ -19,7 +18,7 @@
           <label for="y">y Dimension</label>
           <input type="number" class="form-control" name="y" min="0" step="1" [(ngModel)]='ySize' required>
         </div>
-		<button class="btn btn-success" [disabled]="!f.valid" (click)='onCreate(xSize,ySize)'>Create</button>
+		<button type="button" class="btn btn-success" [disabled]="!f.valid" (click)='onCreate(xSize,ySize)'>Create</button>
 		<div class="btn btn-primary">Edit</div>
 	</form>
 </div>
