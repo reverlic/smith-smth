@@ -1,12 +1,71 @@
 .main-nav{
-	border: 1px solid #333;
-	border-top-right-radius: 4px;
-	border-bottom-right-radius: 4px;
 	position: fixed;
-	left:-1px;
-	top:100px;
-	width:30px;
+	left:-20px;
+	top:20%;
+	transition:left 0.3s ease;
 }
-.main-nav .btn{
-	padding-left:5px;
+.main-nav.open{
+	left: 40px;
+}
+.main-nav .center-ball{
+	border: 1px solid #333;
+	border-radius: 50%;
+	height: 40px;
+	width:40px;
+	background-color: #CCC;
+	transition:transform 0.4s ease;
+}
+.main-nav .center-ball .glyphicon{
+	top:11;
+	left:12.5;
+}
+
+.main-nav:hover .center-ball{
+	transform: rotate(180deg) scale(1.5);
+}
+.main-nav .center-ball:before{
+  content: "";
+  position: absolute;
+  height: 40px;
+  width:40px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 0% 0px, #ffffff, rgba(255, 255, 255, 0) 58%);
+  transition:background 0.3s ease;
+}
+
+.main-nav .float-ball{
+	position: absolute;
+	border-radius: 50%;
+	top:5px;
+	left:5px;
+	height: 30px;
+	width:30px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 30px;
+	transform: translate(0px,0px) scale(0);
+	transition:transform 0.4s ease;
+}
+
+.main-nav .float-ball .glyphicon,.main-nav .float-ball .fa{
+	padding-top: 6px;
+}
+
+.main-nav:hover .float-ball.ball-1{
+	transform: translate(-45px,0px) scale(1);
+}
+.main-nav .float-ball.ball-1{
+	background-color: #FCC;
+}
+.main-nav:hover .float-ball.ball-2{
+	transform: translate(-33.28px,-33.28px) scale(1);
+}
+.main-nav .float-ball.ball-2{
+	background-color: #FCC;
+}
+.main-nav:hover .float-ball.ball-3{
+	transform: translate(0px,-45px) scale(1);
+}
+.main-nav .float-ball.ball-3{
+	background-color: #FCC;
 }

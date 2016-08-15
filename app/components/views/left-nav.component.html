@@ -1,5 +1,12 @@
-<div class="main-nav">
-	<div class="btn">
-		<span class="glyphicon glyphicon-user"></span>
+<div class="main-nav" [ngClass]="{open: navToggle}" (click)="navToggle = !navToggle">
+	<div class="center-ball">
+		<span class="glyphicon glyphicon-th-large" title="Navigation"></span>
 	</div>
+	<div class="float-ball ball-1" title="Home" (click)="navigateTo('home')">
+		<span class="glyphicon glyphicon-home"></span>
+	</div>
+	<div class="float-ball ball-2" title="Map" (click)="navigateTo('map-editor')">
+		<span class="fa fa-map"></span>
+	</div>
+
 </div>

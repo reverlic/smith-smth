@@ -9,15 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var LeftNavigation = (function () {
-    function LeftNavigation() {
+    function LeftNavigation(router) {
+        this.router = router;
     }
+    LeftNavigation.prototype.navigateTo = function (target) {
+        console.log('navigate to ' + target);
+        this.router.navigate([target]);
+    };
     LeftNavigation = __decorate([
         core_1.Component({
             selector: 'left-nav',
             templateUrl: 'app/components/views/left-nav.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.Router])
     ], LeftNavigation);
     return LeftNavigation;
 }());
