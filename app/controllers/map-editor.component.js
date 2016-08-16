@@ -14,18 +14,28 @@ var router_1 = require('@angular/router');
 var map_1 = require('../Models/map');
 var map_component_1 = require('../components/map.component');
 var map_edit_tool_component_1 = require('../components/map-edit-tool.component');
+var blackSmith_service_1 = require('../services/blackSmith.service');
+var loading_square_component_1 = require('../components/loading-square.component');
 var MapEditorComponent = (function () {
-    function MapEditorComponent(router, route) {
+    function MapEditorComponent(router, route, bsService) {
         this.router = router;
         this.route = route;
+        this.bsService = bsService;
         this.selectedCell = { x: null, y: null };
         this.title = 'the legendary begins';
         this.iconType = [];
+        this.createState = false;
         this.selectedCellType = 0;
     }
     MapEditorComponent.prototype.onCellSeleted = function (position) {
         this.selectedCell = position;
         this.editSelectedCell(this.selectedCellType);
+    };
+    MapEditorComponent.prototype.clickCreate = function () {
+        this.createState = true;
+        this.name = '';
+        this.xSize = 1;
+        this.ySize = 1;
     };
     MapEditorComponent.prototype.editSelectedCell = function (cellType) {
         this.mapData.layout[this.selectedCell.x][this.selectedCell.y].terrain = cellType;
@@ -33,8 +43,10 @@ var MapEditorComponent = (function () {
     MapEditorComponent.prototype.editCellType = function (cellType) {
         this.selectedCellType = cellType;
     };
-    MapEditorComponent.prototype.onCreate = function (xSize, ySize) {
+    MapEditorComponent.prototype.onCreate = function (xSize, ySize, name) {
         this.mapData = new map_1.Map(xSize, ySize);
+        this.mapData.name = name;
+        this.createState = false;
     };
     MapEditorComponent.prototype.downloadMap = function () {
         console.log('1');
@@ -44,7 +56,20 @@ var MapEditorComponent = (function () {
         link.href = 'data:application/x-download;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.mapData));
         link.click();
     };
+    MapEditorComponent.prototype.saveMap = function () {
+        this.bsService.syncMapData(this.mapData).then(function (x) { return console.log(x); });
+    };
+    MapEditorComponent.prototype.getMapById = function (mapId) {
+        var _this = this;
+        this.bsService.getMapById(mapId).then(function (map) { _this.mapData = map; });
+    };
     MapEditorComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.bsService.getAllMap().then(function (maps) {
+            _this.mapList = maps;
+        }).catch(function (e) {
+            _this.error = 'something wrong when we try to get metalsmith :( ';
+        });
         for (var i = 0; i < 16; i++) {
             this.iconType.push({ name: 'cell-' + i, value: i });
         }
@@ -53,9 +78,10 @@ var MapEditorComponent = (function () {
         core_1.Component({
             selector: 'map-editor',
             templateUrl: 'app/controllers/views/map-editor.component.html',
-            directives: [forms_1.FORM_DIRECTIVES, map_component_1.MapComponent, map_edit_tool_component_1.MapEditToolComponent]
+            providers: [blackSmith_service_1.BsService],
+            directives: [forms_1.FORM_DIRECTIVES, map_component_1.MapComponent, map_edit_tool_component_1.MapEditToolComponent, loading_square_component_1.loadingSquareComponent]
         }), 
-        __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute, blackSmith_service_1.BsService])
     ], MapEditorComponent);
     return MapEditorComponent;
 }());

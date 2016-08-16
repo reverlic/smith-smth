@@ -1,7 +1,11 @@
 
 <table class="map-board">
+	<tr>
+		<td class="row-number"></td>
+		<td class="row-number" *ngFor="let item of mapData.layout[0];let y = index">{{y}}</td>
+	</tr>
 	<tr *ngFor="let row of mapData.layout;let x = index">
+		<td class="row-number">{{x}}</td>
 		<td *ngFor="let cell of row;let y = index" [className]="'cell-'+cell.terrain" (click)='onSelect(x,y)'></td>
 	</tr>
 </table>
-<div class="btn btn-primary" (click)='showMapData()'>show map data</div>

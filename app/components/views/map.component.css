@@ -1,13 +1,23 @@
 .map-board{
-  background-color: #DDD;
   border-radius: 5px;
 }
 .map-board td{
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   margin: 2px;
-  padding: 5px;
+  padding: 2px;
+  background-color: #DDD;
 }
+.map-board td.row-number{
+  background-color: transparent;
+  line-height: 31px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+
+
+
 .map-board .cell-0{
   border: 1px dashed rgba(0,0,0,0.5);
 }

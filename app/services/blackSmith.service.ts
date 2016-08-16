@@ -1,6 +1,7 @@
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { Smith } from '../models/Smith';
+import { Map,MapCell } from '../models/map';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -36,6 +37,40 @@ export class BsService {
                .catch(this.handleError);
   }
 
+  syncMapData(map: Map){
+    var mapModel = {
+        id: null,
+        name: map.name,
+        layout: JSON.stringify(map.layout),
+      }
+
+    if(map.id){
+      mapModel.id = map.id;
+      return this.http.post(this.baseUrl+'updatemap',mapModel)
+        .toPromise()
+        .then(response => response.json())
+        .catch(this.handleError);
+    }else{
+      return this.http.post(this.baseUrl+'createmap',mapModel)
+        .toPromise()
+        .then(response => response.json())
+        .catch(this.handleError);
+    }
+  }
+  getAllMap(){
+      return this.http.get(this.baseUrl + 'getallmap')
+             .toPromise()
+             .then(response => response.json() as Map[])
+             .catch(this.handleError);
+  }
+
+  getMapById(mapId: number){
+    console.log(mapId);
+    return this.http.post(this.baseUrl + 'getmap',{id:mapId})
+               .toPromise()
+               .then(response => response.json())
+               .catch(this.handleError);
+  }
 
   private handleError(error: any) {
     console.error('An error occurred', error);

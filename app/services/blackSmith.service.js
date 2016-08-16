@@ -40,6 +40,39 @@ var BsService = (function () {
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    BsService.prototype.syncMapData = function (map) {
+        var mapModel = {
+            id: null,
+            name: map.name,
+            layout: JSON.stringify(map.layout),
+        };
+        if (map.id) {
+            mapModel.id = map.id;
+            return this.http.post(this.baseUrl + 'updatemap', mapModel)
+                .toPromise()
+                .then(function (response) { return response.json(); })
+                .catch(this.handleError);
+        }
+        else {
+            return this.http.post(this.baseUrl + 'createmap', mapModel)
+                .toPromise()
+                .then(function (response) { return response.json(); })
+                .catch(this.handleError);
+        }
+    };
+    BsService.prototype.getAllMap = function () {
+        return this.http.get(this.baseUrl + 'getallmap')
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    BsService.prototype.getMapById = function (mapId) {
+        console.log(mapId);
+        return this.http.post(this.baseUrl + 'getmap', { id: mapId })
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
     BsService.prototype.handleError = function (error) {
         console.error('An error occurred', error);
         return Promise.reject(error.message || error);

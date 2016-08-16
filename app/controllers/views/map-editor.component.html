@@ -1,15 +1,42 @@
 <div class="container">
-	<h1>Map Editor</h1>
-	x: {{selectedCell.x}} y: {{selectedCell.y}} cellType: {{selectedCellType}}
+  <h1>Map Editor</h1>
+  <loading-square *ngIf="!mapList"></loading-square>
+  <table class="table" *ngIf="mapList">
+    <thead>
+      <tr>
+        <th>Id.</th>
+        <th>Name</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of mapList">
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>     
+        <td>
+          <span class="btn btn-primary" (click)='getMapById(item.id)'>Edit</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="btn btn-success" (click)="clickCreate()">Create new map</div>
   <div *ngIf='mapData'>
-    	<map [mapData]='mapData' (selectedCell)='onCellSeleted($event)'></map>
-      
-      <div class="btn btn-primary" (click)='downloadMap()'>Save</div>
+      <h2>{{mapData.name}}</h2>
+    	<map style="margin-bottom:20px;" [mapData]='mapData' (selectedCell)='onCellSeleted($event)'></map>
+      <div class="form-group">
+        <div class="btn btn-primary" (click)='downloadMap()'>Download map file</div>
+        <div class="btn btn-success" (click)='saveMap()'>Save</div>
+      </div>
       <map-edit-tool [selectedCellType]='selectedCellType' (updateCellType)='editCellType($event)'></map-edit-tool>
-    
+      
   </div>
 
-	<form *ngIf='!mapData' #f="ngForm">
+	<form *ngIf='createState' #f="ngForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" name="name" [(ngModel)]='name' required>
+        </div>
         <div class="form-group">
           <label for="x">x Dimension</label>
           <input type="number" class="form-control" name="x" min="0" step="1" [(ngModel)]='xSize' required>
@@ -18,7 +45,7 @@
           <label for="y">y Dimension</label>
           <input type="number" class="form-control" name="y" min="0" step="1" [(ngModel)]='ySize' required>
         </div>
-		<button type="button" class="btn btn-success" [disabled]="!f.valid" (click)='onCreate(xSize,ySize)'>Create</button>
-		<div class="btn btn-primary">Edit</div>
+		<button type="button" class="btn btn-success" [disabled]="!f.valid" (click)='onCreate(xSize,ySize,name)'>Create</button>
+		<div class="btn btn-primary" (click)='createState = false;'>Cancel</div>
 	</form>
 </div>

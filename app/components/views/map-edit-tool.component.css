@@ -3,7 +3,7 @@
   position: fixed;
   display: inline;
   left: -82px;
-  top: 100px;
+  top: 25%;
   width: 100px;
   transition: left .5s;
   padding-left:5px;

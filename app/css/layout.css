@@ -1,12 +1,54 @@
 .main-nav{
 	position: fixed;
 	left:-20px;
-	top:20%;
+	top:15%;
 	transition:left 0.3s ease;
+	cursor: pointer;
+}
+.main-nav.inactive:hover{
+    -webkit-animation: beat 2s infinite;
+    animation: beat 2s infinite;
 }
 .main-nav.open{
 	left: 40px;
 }
+
+@keyframes beat {
+ 0% {
+  transform: scale(1);
+ }
+ 25% {
+  transform: scale(0.8);
+ }
+ 50% {
+  transform: scale(1.1);
+ }
+ 75% {
+  transform: scale(0.9);
+ }
+ 100% {
+  transform: scale(1);
+ }
+}
+
+@keyframes beat {
+ 0% {
+  transform: scale(1);
+ }
+ 25% {
+  transform: scale(0.8);
+ }
+ 50% {
+  transform: scale(1.1);
+ }
+ 75% {
+  transform: scale(0.9);
+ }
+ 100% {
+  transform: scale(1);
+ }
+}
+
 .main-nav .center-ball{
 	border: 1px solid #333;
 	border-radius: 50%;
@@ -20,7 +62,7 @@
 	left:12.5;
 }
 
-.main-nav:hover .center-ball{
+.main-nav.open .center-ball{
 	transform: rotate(180deg) scale(1.5);
 }
 .main-nav .center-ball:before{
@@ -51,21 +93,22 @@
 	padding-top: 6px;
 }
 
-.main-nav:hover .float-ball.ball-1{
+.main-nav.open .float-ball.ball-1{
 	transform: translate(-45px,0px) scale(1);
 }
 .main-nav .float-ball.ball-1{
 	background-color: #FCC;
 }
-.main-nav:hover .float-ball.ball-2{
+.main-nav.open .float-ball.ball-2{
 	transform: translate(-33.28px,-33.28px) scale(1);
 }
 .main-nav .float-ball.ball-2{
 	background-color: #FCC;
 }
-.main-nav:hover .float-ball.ball-3{
+.main-nav.open .float-ball.ball-3{
 	transform: translate(0px,-45px) scale(1);
 }
 .main-nav .float-ball.ball-3{
 	background-color: #FCC;
 }
+

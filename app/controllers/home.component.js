@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var blackSmith_service_1 = require('../services/blackSmith.service');
 var smith_form_component_1 = require('../components/smith-form.component');
+var loading_square_component_1 = require('../components/loading-square.component');
 var HomeComponent = (function () {
     function HomeComponent(bsService, router, route) {
         this.bsService = bsService;
@@ -34,10 +35,14 @@ var HomeComponent = (function () {
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.bsService.getAllBs().then(function (data) {
+            console.log(data);
             _this.data = data;
             if (data) {
                 _this.smithModel = data[0];
             }
+        }).catch(function (e) {
+            _this.error = 'something wrong when we try to get metalsmith :( ';
+            _this.data = [];
         });
         this.sub = this.route.params.subscribe(function (params) { _this.lastestId = +params['lastestId']; });
     };
@@ -46,7 +51,7 @@ var HomeComponent = (function () {
             selector: 'my-app',
             templateUrl: 'app/controllers/views/home.component.html',
             providers: [blackSmith_service_1.BsService],
-            directives: [smith_form_component_1.SmitFormComponent]
+            directives: [smith_form_component_1.SmitFormComponent, loading_square_component_1.loadingSquareComponent]
         }), 
         __metadata('design:paramtypes', [blackSmith_service_1.BsService, router_1.Router, router_1.ActivatedRoute])
     ], HomeComponent);
