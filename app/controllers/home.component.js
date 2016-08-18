@@ -18,7 +18,6 @@ var HomeComponent = (function () {
         this.bsService = bsService;
         this.router = router;
         this.route = route;
-        this.data = [];
     }
     HomeComponent.prototype.deleteSmith = function (id) {
         console.log('Smith Id ' + id + ' deleted');

@@ -24,15 +24,27 @@ var MapEditorComponent = (function () {
         this.selectedCell = { x: null, y: null };
         this.title = 'the legendary begins';
         this.iconType = [];
-        this.createState = false;
+        /*UI State*/
+        this.STATE = {
+            select: 1,
+            edit: 2,
+            create: 3
+        };
+        this.uiState = {
+            previous: null,
+            now: this.STATE.select };
         this.selectedCellType = 0;
     }
+    MapEditorComponent.prototype.changeUIState = function (newState) {
+        this.uiState.previous = this.uiState.now;
+        this.uiState.now = newState;
+    };
     MapEditorComponent.prototype.onCellSeleted = function (position) {
         this.selectedCell = position;
         this.editSelectedCell(this.selectedCellType);
     };
     MapEditorComponent.prototype.clickCreate = function () {
-        this.createState = true;
+        this.changeUIState(this.STATE.create);
         this.name = '';
         this.xSize = 1;
         this.ySize = 1;
@@ -46,13 +58,11 @@ var MapEditorComponent = (function () {
     MapEditorComponent.prototype.onCreate = function (xSize, ySize, name) {
         this.mapData = new map_1.Map(xSize, ySize);
         this.mapData.name = name;
-        this.createState = false;
+        this.changeUIState(this.STATE.create);
     };
     MapEditorComponent.prototype.downloadMap = function () {
-        console.log('1');
         var link = document.createElement('a');
         link.setAttribute('download', 'mapData.json');
-        console.log('2');
         link.href = 'data:application/x-download;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.mapData));
         link.click();
     };
@@ -61,7 +71,10 @@ var MapEditorComponent = (function () {
     };
     MapEditorComponent.prototype.getMapById = function (mapId) {
         var _this = this;
-        this.bsService.getMapById(mapId).then(function (map) { _this.mapData = map; });
+        this.bsService.getMapById(mapId).then(function (map) {
+            map.layout = _this.bsService.deCompressedLayout(map.layout);
+            _this.mapData = map;
+        });
     };
     MapEditorComponent.prototype.ngOnInit = function () {
         var _this = this;

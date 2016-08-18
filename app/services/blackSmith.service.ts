@@ -41,8 +41,9 @@ export class BsService {
     var mapModel = {
         id: null,
         name: map.name,
-        layout: JSON.stringify(map.layout),
+        layout: JSON.stringify(this.compressedLayout(map.layout)),
       }
+      
 
     if(map.id){
       mapModel.id = map.id;
@@ -65,11 +66,41 @@ export class BsService {
   }
 
   getMapById(mapId: number){
-    console.log(mapId);
     return this.http.post(this.baseUrl + 'getmap',{id:mapId})
                .toPromise()
                .then(response => response.json())
                .catch(this.handleError);
+  }
+
+  private compressedLayout(layout:MapCell[][]){
+    var result = []
+    for(var i = 0;i < layout.length;i++){
+      result[i] = []
+      for(var j = 0;j < layout[i].length;j++){
+        console.log(layout[i][j].terrain + "," + (layout[i][j].special==null ? '-':layout[i][j].special));
+        result[i].push(layout[i][j].terrain + "," + (layout[i][j].special==null ? '-':layout[i][j].special))
+      }
+    }
+    console.log(result);
+    return result;
+  }
+
+    deCompressedLayout(layout:string[][]){
+    var result = []
+    for(var i = 0;i < layout.length;i++){
+      result[i] = []
+      for(var j = 0;j < layout[i].length;j++){
+        let mapCell = layout[i][j].split(',');
+        let item = new MapCell();
+
+        item.terrain = Number.parseInt(mapCell[0]);
+        item.special = mapCell[1] == '-'? null : Number.parseInt(mapCell[1]);
+        
+        result[i].push(item);
+      }
+    }
+    console.log(result);
+    return result;
   }
 
   private handleError(error: any) {

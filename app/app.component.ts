@@ -9,7 +9,9 @@ import { LeftNavigation } from './components/left-navigation.component';
   template: `
   <left-nav></left-nav>
   <h1>{{title}}</h1>
+  <div class="container">
   <router-outlet></router-outlet>
+  </div>
   `,
   directives: [ROUTER_DIRECTIVES,LeftNavigation],
 })

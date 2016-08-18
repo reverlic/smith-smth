@@ -1,4 +1,4 @@
-<h1>Homes {{latestId}}</h1>
+<h1>Homes </h1>
 <table class="table">
 	<thead>
 		<tr>
@@ -21,6 +21,6 @@
 		<tr>
 	</tbody>
 </table>
-<loading-square *ngIf="data&&!error"></loading-square>
+<loading-square *ngIf="!data&&!error"></loading-square>
 <div class='alert alert-danger' *ngIf="error">{{error}}</div>
 <div class="btn btn-success" *ngIf="!addState" (click)='addNewMetalSmith()'>Add New Metalsmith</div>

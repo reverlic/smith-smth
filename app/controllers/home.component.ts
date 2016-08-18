@@ -15,7 +15,7 @@ import { loadingSquareComponent } from '../components/loading-square.component';
 
 export class HomeComponent implements OnInit { 
 	smithModel : Smith;
-	data : Smith[] = [];
+	data : Smith[];
 	sub : any;
 	lastestId : number;
 	error: any;

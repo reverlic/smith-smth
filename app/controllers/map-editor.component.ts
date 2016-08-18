@@ -24,7 +24,15 @@ export class MapEditorComponent implements OnInit {
 	selectedCellType: number;
 	title = 'the legendary begins';
 	iconType = [];
-	createState = false;
+	/*UI State*/
+	STATE = {
+		select:1,
+		edit:2,
+		create:3	
+	}
+	uiState = {
+		previous: null,
+		now: this.STATE.select};
 
 	name : string;
 	xSize : number;
@@ -34,13 +42,18 @@ export class MapEditorComponent implements OnInit {
 		this.selectedCellType = 0;
 	}
 
+	private changeUIState(newState){
+		this.uiState.previous = this.uiState.now;
+		this.uiState.now = newState;
+	}
+
 	onCellSeleted(position){
 		this.selectedCell = position;
 		this.editSelectedCell(this.selectedCellType);
 	}
 
 	clickCreate(){
-		this.createState = true;
+		this.changeUIState(this.STATE.create);
 		this.name = '';
 		this.xSize = 1;
 		this.ySize = 1;
@@ -57,14 +70,12 @@ export class MapEditorComponent implements OnInit {
 	onCreate(xSize,ySize,name){
 		this.mapData = new Map(xSize,ySize);
 		this.mapData.name = name;
-		this.createState = false;
+		this.changeUIState(this.STATE.create);
 	}
 
 	downloadMap(){
-			console.log('1');
 		    var link = document.createElement('a');
     		link.setAttribute('download','mapData.json');
-    		console.log('2');
     		link.href = 'data:application/x-download;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.mapData));
     		link.click();
 	}
@@ -75,7 +86,9 @@ export class MapEditorComponent implements OnInit {
 
 	getMapById(mapId){
 
-		this.bsService.getMapById(mapId).then(map => {this.mapData = map;});
+		this.bsService.getMapById(mapId).then(map => {
+			map.layout = this.bsService.deCompressedLayout(map.layout);
+			this.mapData = map;});
 	}
 
 	ngOnInit() {
