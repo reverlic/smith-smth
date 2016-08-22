@@ -81,7 +81,8 @@ var MapEditorComponent = (function () {
         this.bsService.getAllMap().then(function (maps) {
             _this.mapList = maps;
         }).catch(function (e) {
-            _this.error = 'something wrong when we try to get metalsmith :( ';
+            _this.error = 'something wrong when we try to get Map List :( ';
+            _this.mapList = [];
         });
         for (var i = 0; i < 16; i++) {
             this.iconType.push({ name: 'cell-' + i, value: i });

@@ -95,7 +95,8 @@ export class MapEditorComponent implements OnInit {
 		this.bsService.getAllMap().then(maps => {
 			this.mapList = maps;
 		}).catch(e => { 
-			this.error = 'something wrong when we try to get metalsmith :( ';
+			this.error = 'something wrong when we try to get Map List :( ';
+			this.mapList = [];
 		 });
 
 		for(let i = 0;i < 16;i++){
